@@ -1,0 +1,50 @@
+{
+  "name": "timbre",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "company": "NODE_ENV=development  nodemon --experimental-modules  src/company.js",
+    "start": "node src/company.js",
+    "companySand": "NODE_ENV=sandbox  node --experimental-modules  src/company.js",
+    "companyProd": "NODE_ENV=production  node --experimental-modules  src/company.js",
+    "capturePage": "NODE_ENV=development  nodemon --experimental-modules  src/capturePage.js",
+    "capturePageSand": "NODE_ENV=sandbox  node --experimental-modules  src/capturePage.js",
+    "capturePageProd": "NODE_ENV=production  node --experimental-modules  src/capturePage.js",
+    "websocket": "NODE_ENV=development  nodemon --experimental-modules  src/websocket.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "cross-env NODE_ENV=development npx sequelize-cli db:migrate",
+    "migrateSand": "NODE_ENV=sandbox npx sequelize-cli db:migrate",
+    "create": "cross-env NODE_ENV=development npx sequelize-cli db:create",
+    "createSand": "NODE_ENV=sandbox npx sequelize-cli db:create"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "cross-env": "^7.0.3",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "jsdom": "^22.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.25.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "node-fetch": "^2.6.1",
+    "sequelize": "^6.37.3",
+    "sequelize-auto-migrations": "^1.0.3",
+    "tencentcloud-sdk-nodejs": "^4.1.17",
+    "utf8": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3",
+    "sequelize-cli": "^6.6.2"
+  }
+}
