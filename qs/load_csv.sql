@@ -1,6 +1,10 @@
 SET FOREIGN_KEY_CHECKS = 0;
 use trichain_db;
 drop table quizquestions;
+
+
+
+
 CREATE TABLE `quizquestions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question` VARCHAR(255) NOT NULL,
@@ -58,7 +62,6 @@ from questionsAndAnswers;
 /*
 insertion of options in quizquestionoptions table 
 */
-
 insert into quizquestionoptions
 (
 optionText
