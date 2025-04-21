@@ -43,6 +43,7 @@ module.exports = {
         allowNull: true,
       },
     });
+   
     await queryInterface.createTable('leaderboard', {
       id: {
         type: Sequelize.INTEGER,
@@ -756,13 +757,12 @@ module.exports = {
     // });
 
     // Add index
-  //   await queryInterface.addIndex('apiAccessLogs', ['profileId']);
+    //   await queryInterface.addIndex('apiAccessLogs', ['profileId']);
   },
 
 
   async down(queryInterface, Sequelize) {
     // Drop tables in order that respects dependency ordering
-    // await queryInterface.dropTable('jwts');
     // await queryInterface.dropTable('adminProfiles');
     // await queryInterface.dropTable('userProfiles');
     // await queryInterface.dropTable('accounts');
@@ -770,6 +770,7 @@ module.exports = {
     await queryInterface.dropTable('quizQuestionOptions');
     await queryInterface.dropTable('quizQuestions');
     await queryInterface.dropTable('leaderboard');
+ 
     await queryInterface.dropTable('coupons');
     await queryInterface.dropTable('customers');
 

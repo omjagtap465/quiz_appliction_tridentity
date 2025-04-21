@@ -26,6 +26,12 @@ export default (sequelize, DataTypes) => {
     }
   );
   Customers.associate = (models) => {
+    Customers.hasMany(models.Jwt, {
+      foreignKey: "customerId",
+      as: "jwts",
+    });
+  }
+  Customers.associate = (models) => {
     Customers.hasOne(models.LeaderBoard, {
       foreignKey: "customerId",
       as: "leaderboard",

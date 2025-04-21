@@ -20,7 +20,7 @@ import QuizQuestionsModel from './models/QuizQuestions.js'
 import LeaderBoardModel from './models/LeaderBoard.js'
 import QuizSelectedByUserModel from './models/QuizSelectedByUser.js'
 import QuizQuestionOptionsModel from './models/QuizQuestionOptions.js'
-
+import JwtModel from './models/Jwt.js'
 // import AppModel from './models/appSecret/App.js';
 // import AppSecretKeyModel from './models/appSecret/AppSecretKey.js';
 // import AppSecretKeyRightModel from './models/appSecret/AppSecretKeyRight.js';
@@ -98,9 +98,9 @@ export const startConnection = async () => {
   // MODELS.Account.hasOne(MODELS.AdminProfile);
   // MODELS.AdminProfile.belongsTo(MODELS.Account);
 
-  // MODELS.Jwt = JwtModel(sequelize, Sequelize);
-  // MODELS.UserProfile.hasMany(MODELS.Jwt);
-  // MODELS.Jwt.belongsTo(MODELS.UserProfile);
+  MODELS.Jwt = JwtModel(sequelize, Sequelize);
+  MODELS.Customers.hasMany(MODELS.Jwt);
+  MODELS.Jwt.belongsTo(MODELS.Customers);
   // MODELS.AdminProfile.hasMany(MODELS.Jwt);
   // MODELS.Jwt.belongsTo(MODELS.AdminProfile);
 

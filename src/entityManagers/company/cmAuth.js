@@ -4,12 +4,9 @@ const classIdentifier = "Company Auth";
 export class CMAuth {
   static async login(username, password) {
     const {
-      Account,
-      UserProfile,
-      CompanyProfile,
+      Customers,
       Jwt,
-      AccessRole,
-      AccessRoleRight,
+
     } = MODELS;
     console.log(`username, password`, username, password);
     const accountE = await Account.findOne({
@@ -58,74 +55,76 @@ export class CMAuth {
     });
     return account;
   }
-  static async loginViaSSO(querier, ssoToken) {
-    console.log(`sso??`, ssoToken);
-    const { Account, UserProfile, CompanyProfile, UserXCompany } = MODELS;
-    const userXCompanyE = await UserXCompany.findOne({ where: { ssoToken } });
-    if (userXCompanyE) {
-      await userXCompanyE.update({ ssoToken: null });
-      console.log(`userXCompanyE??`, userXCompanyE);
-      const userProfileE = await UserProfile.findByPk(
-        userXCompanyE.userProfileId
-      );
-      console.log(`userProfileE??`, userProfileE);
-      const account = await Account.findByPk(userProfileE.accountId, {
-        include: [
-          {
-            model: UserProfile,
-            include: [
-              {
-                model: CompanyProfile,
-                where: { id: userXCompanyE.companyProfileId },
-              },
-            ],
-          },
-        ],
-      });
-      return await account.get({ plain: true });
-    }
-    return null;
-  }
+  // static async loginViaSSO(querier, ssoToken) {
+  //   console.log(`sso??`, ssoToken);
+  //   const { Account, UserProfile, CompanyProfile, UserXCompany } = MODELS;
+  //   const userXCompanyE = await UserXCompany.findOne({ where: { ssoToken } });
+  //   if (userXCompanyE) {
+  //     await userXCompanyE.update({ ssoToken: null });
+  //     console.log(`userXCompanyE??`, userXCompanyE);
+  //     const userProfileE = await UserProfile.findByPk(
+  //       userXCompanyE.userProfileId
+  //     );
+  //     console.log(`userProfileE??`, userProfileE);
+  //     const account = await Account.findByPk(userProfileE.accountId, {
+  //       include: [
+  //         {
+  //           model: UserProfile,
+  //           include: [
+  //             {
+  //               model: CompanyProfile,
+  //               where: { id: userXCompanyE.companyProfileId },
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     });
+  //     return await account.get({ plain: true });
+  //   }
+  //   return null;
+  // }
 
-  static async profile(querier) {
-    const { UserProfile, CompanyProfile } = MODELS;
-    const claims = querier.claims;
-    const account = await UserProfile.findByPk(claims.id, {
-      where: { status: `active` },
-    });
-    return await account.get({ plain: true });
-  }
 
-  static async getAppDetails(querier) {
-    const { App, AppSecretKey, AppSecretKeyRight, WhiteListedIp } = MODELS;
-    const { appId, sid } = querier;
-    console.log("appId", appId);
-    console.log("sid", sid);
-    const appDetails = await App.findOne({
-      where: { customAppId: appId },
-      include: [
-        {
-          model: AppSecretKey,
-          where: {
-            sid: sid,
-          },
-          include: [
-            {
-              model: AppSecretKeyRight,
-            },
-          ],
-        },
-        {
-          model: WhiteListedIp,
-        },
-      ],
-    });
-    if (appDetails) {
-      return { ok: true, detail: await appDetails.get({ plain: true }) };
-    } else {
-      return { ok: false };
-    }
-  }
+    // REQUIRED FOR CHECKING
+  // static async profile(querier) {
+  //   const { UserProfile, CompanyProfile } = MODELS;
+  //   const claims = querier.claims;
+  //   const account = await UserProfile.findByPk(claims.id, {
+  //     where: { status: `active` },
+  //   });
+  //   return await account.get({ plain: true });
+  // }
+
+  // static async getAppDetails(querier) {
+  //   const { App, AppSecretKey, AppSecretKeyRight, WhiteListedIp } = MODELS;
+  //   const { appId, sid } = querier;
+  //   console.log("appId", appId);
+  //   console.log("sid", sid);
+  //   const appDetails = await App.findOne({
+  //     where: { customAppId: appId },
+  //     include: [
+  //       {
+  //         model: AppSecretKey,
+  //         where: {
+  //           sid: sid,
+  //         },
+  //         include: [
+  //           {
+  //             model: AppSecretKeyRight,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         model: WhiteListedIp,
+  //       },
+  //     ],
+  //   });
+  //   if (appDetails) {
+  //     return { ok: true, detail: await appDetails.get({ plain: true }) };
+  //   } else {
+  //     return { ok: false };
+  //   }
+  // }
 
   static async checkJwt(token) {
     const { Jwt } = MODELS;

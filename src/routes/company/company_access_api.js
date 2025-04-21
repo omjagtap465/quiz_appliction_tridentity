@@ -10,11 +10,8 @@ company_access_api.get(`${ns}/test`, function (req, res) {
 });
 company_access_api.post(`${ns}/login`, async (req, res) => {
   const body = req.body;
+  const { data } = body;
 
-  const { querier, data } = body;
-  if (!querier) {
-    return res.status(403).send(`Failure to detech IP`);
-  }
   const account = await CMAuth.login(
     querier,
     data.companyId,

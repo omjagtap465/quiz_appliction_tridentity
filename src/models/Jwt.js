@@ -17,9 +17,9 @@ export default (sequelize, DataTypes) => {
       expire: {
         type: DataTypes.STRING,
       },
-      profileType: {
-        type: DataTypes.STRING,
-      },
+      customerId:{
+        type:DataTypes.INTEGER,
+      }
     },
     {
       timestamps: true, // Enables createdAt and updatedAt
@@ -29,10 +29,10 @@ export default (sequelize, DataTypes) => {
 
   // Define associations
   Jwt.associate = (models) => {
-    // JWT belongs to UserProfile
-    Jwt.belongsTo(models.UserProfile, {
+    // JWT belongs to customer
+    Jwt.belongsTo(models.Customers, {
       foreignKey: 'customerId',
-      as: 'customer',
+      as: 'customers',
     });
   };
 
